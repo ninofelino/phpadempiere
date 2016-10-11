@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Accounting</title>
+<link rel="stylesheet" href="lib/angular-material.css">
+<script src="../lib/angular.min.js"></script>
+<script src="../lib/angular-animate.min.js"></script>
+<script src="../lib/angular-aria.min.js"></script>
+<script src="../lib/angular-material.min.js"></script>
+<link rel="stylesheet" href="lib/icon.css">
+<script src="../lib/angular-ui-router.js"></script>
+<script src="../lib/angular-resource.min.js"></script>
+<script src="../lib/angular-material-icons.min.js"></script>
+
+<script type="text/ng-template" id="/m_product.tpl"> 
+      <h2>window</h2>
+</script>
+</head>
+
+<script>
+
+
+
+angular.module('demoApp', ['ngMaterial','ui.router','ngResource'])
+.config(function($stateProvider,$urlRouterProvider){
+    $stateProvider
+    .state('template',{url:"view1",templateUrl:'/m_product.tpl'})
+    .state('c_order',{templateUrl:'salesorder.html',controller: function($scope,$http)
+          {$scope.title="Sales Order";
+
+             $http.get("../index.php/sql/select a.datepromised,a.poreference,(select name from c_bpartner where c_bpartner_id=a.c_bpartner_id) as bpartner from c_order a limit 1000")
+            .then(function(response){ $scope.related = response.data; });
+            
+          }
+    }) 
+    .state('ad_client',{templateUrl:'padclient.html',controller: function($scope,$http)
+          {$scope.title="Client";
+
+             $http.get("../sql/select *  from ad_client")
+            .then(function(response){ $scope.related = response.data; });
+            
+          }
+    }) 
+ .state('ad_user',{templateUrl:'paduser.html',controller: function($scope,$http)
+          {$scope.title="Client";
+
+             $http.get("../sql/select *  from ad_user")
+            .then(function(response){ $scope.related = response.data; });
+            
+          }
+    }) 
+   .state('ad_role',{templateUrl:'padrole.html',controller: function($scope,$http)
+          {$scope.title="Client";
+
+             $http.get("../sql/select *  from ad_role")
+            .then(function(response){ $scope.related = response.data; });
+            
+          }
+    }) 
+    })
+.controller('AppCtrl',
+function($scope,$mdSidenav,$http){
+    
+     $scope.toggleSidenav = function () {
+    console.log('toggleSidenav');
+    $mdSidenav('nav').toggle();
+  };
+ 
+   $http.get("../gettab.php")
+            .then(function(response){ $scope.related = response.data; });
+      $scope.appname="window";    
+     
+   })
+
+
+;
+
+</script
+  
+
+
+
+<body>
+
+<div ng-app="demoApp">
+
+<div ng-controller="AppCtrl">
+  <div ng-app="app" ng-controller="AppCtrl" layout-fill flex layout="column">
+    <md-toolbar class="fixed">
+             <div class="md-toolbar-tools">
+                  <span>{{appname}}</span>
+                  <span flex></span>
+                  <md-button ng-click="toggleSidenav()">
+                  <md-icon md-svg-src="../lib/ic_menu_white_24px.svg"></md-icon>
+                  </md-button>
+             </div>
+    </md-toolbar>  
+
+  <div layout="row" layout-fill flex="50">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="nav">
+     <md-subheader>  Autocomplete Enteprise Resource Planing</md-subheader>
+      <md-content>
+        <md-button ng-click="toggleSidenav()">Hide Sidenav</md-button>
+<!----          content menu -->                    
+                <div ng-repeat="item in related">
+                     <md-menu-item>
+                     <md-button ng-click="toggleSidenav()" ui-sref="{{item.url}}">
+                     <md-icon md-svg-src="lib/{{item.action}}.svg"   class="s24" aria-label="Cake"></md-icon>
+                     <h4>{{item.window}}</h4>
+                     <p><small>{{item.name}}</small></p>
+                         <div ng-repeat="i in item.name">
+                         {{i.tablename}}
+                         </div>
+                     </md-button>
+                </div>   
+      </md-content>
+    </md-sidenav>
+    
+    
+     
+
+    <md-content>   
+     
+<!-- content template -->       
+    <md-icon md-svg-src="../lib/ic_menu_black_24px.svg"></md-icon>
+       <label>Searh</label>  
+     
+
+
+      <md-content  flex="100" class="md-padding"  layout="col">
+          <md-card flex="50" ng-repeat="item in related">  
+               <b>{{item.window}}</b>
+               <br>
+                <div ng-repeat="x in item.tab">
+                    <div layout="row" layout-wrap flex="100">
+                     <md-input-container> 
+                    <label>{{x.tab}}</label><input ></input>
+                     </md-input-container>
+                    </div>
+                </div>
+           </md-card>     
+      </md-content>
+       <div id="content" ui-view>loading</div>
+       
+    </md-content>
+   </div> <!-- layout row -->
+</div>    <!-- app -->
+   </div>
+
+</body>
+</html>
+

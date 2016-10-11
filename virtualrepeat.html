@@ -1,0 +1,81 @@
+<html lang="en" >
+   <head>
+      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	  <style>
+         .vrepeatContainer #horizontal-container {
+           height: 100px;
+           width: 830px; 
+         }
+
+         .vrepeatContainer #vertical-container {
+             height: 292px;
+             width: 400px; 
+         }
+
+         .vrepeatContainer .repeated-item-horizontal {
+            border-right: 1px solid #ddd;
+            box-sizing: border-box;
+            display: inline-block;
+            height: 84px;
+            padding-top: 35px;
+            text-align: center;
+            width: 50px; 
+         }
+
+         .vrepeatContainer .repeated-item-vertical {
+            border-bottom: 1px solid #ddd;
+            box-sizing: border-box;
+            height: 40px;
+            padding-top: 10px;
+         }
+
+         .vrepeatContainer md-content {
+            margin: 16px; 
+         }
+         .vrepeatContainer md-virtual-repeat-container {
+            border: solid 1px grey; 
+         }	  
+	  </style>
+      <script language="javascript">
+         angular
+            .module('firstApplication', ['ngMaterial'])
+            .controller('vrepeatController', vrepeatController);
+           
+            function vrepeatController ($scope,$http) { 
+               this.items = [];
+              // for (var i = 0; i < 1000; i++) {
+               //   this.items.push(i);
+               //}
+            $http.get('index.php/select * from ad_window' ).then(function(response){ this.items = response.data; }); 
+        
+            }	  
+      </script>      
+   </head>
+   <body ng-app="firstApplication"> 
+       {{vrepeatController}}
+      <div class="vrepeatContainer" ng-controller="vrepeatController as ctrl" ng-cloak>
+         <md-content layout="column">
+            <h2>Horizontal Repeat</h2>
+            <md-virtual-repeat-container id="horizontal-container" md-orient-horizontal>
+               <div md-virtual-repeat="item in ctrl.items"
+                  class="repeated-item-horizontal" flex>
+                  {{item.name}}
+               </div>
+            </md-virtual-repeat-container>
+            <h2>Vertical Repeat</h2>
+            <md-virtual-repeat-container id="vertical-container">
+                <div md-virtual-repeat="item in ctrl.items"
+                  class="repeated-item-vertical" flex>
+                  {{item}}
+               </div>
+            </md-virtual-repeat-container>
+         </md-content>
+      </div>
+   </body>
+</html>

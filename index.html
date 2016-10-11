@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html ng-app="demoApp">
+<head>
+<title>Felino Node.js </title>
+<link rel="stylesheet" href="lib/angular-material.min.css">
+<script src="lib/angular.min.js"></script>
+<script src="lib/angular-animate.min.js"></script>
+<script src="lib/angular-aria.min.js"></script>
+<!-- Angular Material Javascript now available via Google CDN; version 1.0.7 used here -->
+<script src="lib/angular-material.min.js"></script>
+<link rel="stylesheet" href="lib/icon.css">
+<link rel="stylesheet" href="lib/angular-material.min.css">
+<script src="lib/angular-ui-router.js"></script>
+<script src="lib/angular-resource.min.js"></script>
+<script src="lib/angular-material-icons.min.js"></script>
+</head>
+ <script type="text/ng-template" id="/view2.tpl"> 
+      <h2>Customer</h2>
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button class="md-raised">Button</md-button>
+      <md-button class="md-raised md-primary">Primary</md-button>
+      <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
+      <md-button class="md-raised md-warn">Warn</md-button>
+      <div class="label">Raised</div>
+    </section>
+      {{title}}
+</script>
+ <script type="text/ng-template" id="view1.html"> 
+      <h2>Product</h2>
+</script>
+
+ <script type="text/ng-template" id="/custumer.tpl"> 
+      <h2>{{title}}</h2>
+      <md-content>
+         this content
+         <md-button md-no-ink class="md-primary">Primary</md-button>
+         
+
+      </md-content>  
+      <md-content ng-cloak>
+       <md-button>{{title1}}</md-button>
+    
+      {{related}}
+            <mdt-table>
+    <mdt-header-row>
+      
+      <mdt-column align-rule="left">Dessert (100g serving)</mdt-column>
+      <mdt-column align-rule="right">Calories</mdt-column>
+      <mdt-column align-rule="right">Fat (g)</mdt-column>
+      <mdt-column align-rule="right">Carbs (g)</mdt-column>
+      <mdt-column align-rule="right">Protein (g)</mdt-column>
+      <mdt-column align-rule="right">Sodium (mg)</mdt-column>
+      <mdt-column align-rule="right">Calcium (%)</mdt-column>
+      <mdt-column align-rule="right">Iron (%)</mdt-column>
+    </mdt-header-row>
+    <mdt-row ng-repeat="nutrition in nutritionList">
+      <mdt-cell>{{nutrition.name}}</mdt-cell>
+      <mdt-cell>{{nutrition.calories}}</mdt-cell>
+      <mdt-cell>{{nutrition.fat}}</mdt-cell>
+      <mdt-cell>{{nutrition.carbs}}</mdt-cell>
+      <mdt-cell>{{nutrition.protein}}</mdt-cell>
+      <mdt-cell>{{nutrition.sodium}}</mdt-cell>
+      <mdt-cell>{{nutrition.calcium}}</mdt-cell>
+      <mdt-cell>{{nutrition.iron}}</mdt-cell>
+    </mdt-row>
+  </mdt-table>
+
+      <md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-gutter="12px" md-row-height="1:1">
+       ooo
+      </md-grid-title class="green">
+            <md-grid-tile-footer>
+        <h3>first tile</h3>
+      </md-grid-tile-footer>
+      </md-grid-title>
+      <div ng-repeat="dt in related">
+          <md-grid-title class="green"> 
+          <li>{{dt.name}} </li>
+          </md-grid-title>
+      </div>  
+      </md-grid-list>
+ <div md-virtual-repeat="i in related">Hello {{i}}!</div>
+      <md-virtual-repeat-container>
+  <div md-virtual-repeat="i in related">Hello {{i}}!</div>
+</md-virtual-repeat-container>
+   </md-content>
+</script>
+<script>
+
+angular.module('demoApp', ['ngMaterial','ui.router','ngResource'])
+.config(function($stateProvider,$urlRouterProvider){
+    $stateProvider
+    .state('template',{url:"view1",templateUrl:'/template'})
+    .state('view2',{templateUrl:'/view2.tpl',controller: function($scope)
+          {$scope.title='this template 2';}
+    }) 
+    .state('custumer',{templateUrl:'/custumer.tpl',controller: function($scope,$http)
+          {$scope.title='Custumer';
+            $http.get("database/custumer.json")
+            .then(function(response){ $scope.related = response.data; });
+          }
+    })   
+    })
+.controller('AppCtrl',
+function($scope,$mdSidenav,$http){
+    
+     $scope.toggleSidenav = function () {
+    console.log('toggleSidenav');
+    $mdSidenav('nav').toggle();
+  };
+ 
+      $http.get("menu")
+            .then(function(response){ $scope.related = response.data; });
+          
+
+
+   })
+
+
+;
+
+</script>
+<style>
+    md-toolbar.fixed {
+  position: fixed;
+}
+md-toolbar.fixed + * {
+  padding-top: 64px;
+}
+
+</style>    
+
+
+
+<body>
+
+<div ng-app="demoApp">
+
+<div ng-controller="AppCtrl">
+    <div ng-app="app" ng-controller="AppCtrl" layout-fill flex layout="column">
+  <md-toolbar class="fixed">
+    <div class="md-toolbar-tools">
+      <span>Full Height Test</span>
+      <span flex></span>
+      <md-button ng-click="toggleSidenav()">Toggle Sidenav</md-button>
+    </div>
+  </md-toolbar>
+  <div layout="row" layout-fill flex>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="nav">
+      <md-subheader>
+        
+          Enteprise Resource Planing</md-subheader>
+      <md-content>
+        <md-button>Hide Sidenav</md-button>
+                  
+                <div ng-repeat="item in related">
+            <md-menu-item>
+             <md-button >
+                  <md-icon md-svg-src="lib/{{item.action}}.svg"  ui-sref="custumer" class="s24" aria-label="Cake"></md-icon>
+    
+                  {{item.name}}
+            </md-button>
+    
+            <md-button ng-if="item.type==='link'" ui-sref="{{item.url}}" ng-click="toggleSidenav()" >
+                    
+    
+                  {{item.name}}
+            </md-button>
+             <h3 ng-if="item.type==='toogle'" ui-sref="template">{{item.name}}</h3>    
+             
+            </md-menu-item>
+        </div>
+
+
+      </md-content>
+    </md-sidenav>
+    <md-content>
+      Content
+       <div id="content" ui-view>loading</div>
+       
+    </md-content>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
