@@ -9,10 +9,4 @@ views.php
 
 controller.php
 
-function state($name,$url,$templateUrl,$controller,$datasource)"# phpfel" 
-"# phpfel" 
-"# phpfel" 
-"# phpfel" 
-"# phpfel" 
-"# phpfel" 
-"# phpadempiere" 
+function state($name,$url,$templateUrl,$controller,$datasource)"

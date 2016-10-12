@@ -1,17 +1,18 @@
 [
-  {"url":"Administration","icon":"x.svg","dataSource":"select * from ad_menu","templateurl":[
-      {"url":"Organization","icon":"org.svg","templateurl":"org","datasource":"select * from ad_org"},
-      {"url":"Client","icon":"client.svg","templateurl":"client","datasource":"sql/select * from ad_client"},
-      {"url":"Roles","icon":"user.svg","templateurl":"role","datasource":"index.php/sql/select * from ad_role"},
-      {"url":"User","icon":"user.svg","templateurl":"user"}
+  {"url":"Administration","icon":"x.svg","dataSource":"select * from ad_menu","templateurl":
+    [
+    {"url":"Organization","icon":"org.svg","templateurl":"org","datasource":"select * from ad_org"},
+    {"url":"Client","icon":"client.svg","templateurl":"client","datasource":"sql/select * from ad_client"},
+    {"url":"Roles","icon":"user.svg","templateurl":"role","datasource":"index.php/sql/select * from ad_role"},
+    {"url":"User ","icon":"user.svg","templateurl":"user","datasource":"index.php/sql/select * from ad_org"}
       ]},
   {"url":"Window","icon":"window.svg","templateurl":[
-      {"url":"tab","icon":"window.svg","templateurl":"tab"},
-                       {"url":"table","icon":"table.svg","templateurl":"table"},
-                       {"url":"Reference","icon":"window.svg","templateurl":"ad_reference"},
-                       {"url":"view","icon":"view.svg","templateurl":"view"},
-                       {"url":"window","icon":"window.svg","templateurl":"window"}
-                       
+    {"url":"tab","icon":"window.svg","templateurl":"tab","datasource":"index.php/sql/select * from ad_tab limit 10"},
+    {"url":"table","icon":"table.svg","templateurl":"table","datasource":"index.php/sql/select * from ad_table limit 20"},
+    {"url":"Reference","icon":"window.svg","templateurl":"ad_reference","datasource":"index.php/sql/select * from ad_refernce"},
+    {"url":"view","icon":"view.svg","templateurl":"view","datasource":"index.php/sql/select * from ad_role"},
+    {"url":"window","icon":"window.svg","templateurl":"window","datasource":"index.php/sql/select * from ad_role"}
+                      
                        
 
                       ]},
@@ -21,3 +22,4 @@
                                    {"url":"product","templateurl":"product"}
                                    ]}
                      ]
+]

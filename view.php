@@ -46,7 +46,7 @@
   switch($request[0]) {
   case "other":
         break;   
-  case "table":
+  case "tableu":
         
         //printf ("--[ Current Memory Limit: %s\n\n", ini_get('memory_limit'));
  
@@ -121,21 +121,7 @@
     </md-card>
         ';
         break;
-	case "user" :
-	      echo '<h4>{{title}}</h4>
-                <wan-material-paging wmp-total="total" goto-page="gotoPage()" position="center" current-page="currentPage" step="step">
-    </wan-material-paging>
-            <md-content class="md-padding" layout-xs="column" layout="row">
-           
-            <div layout="row" layout-wrap>
-            <div flex="30" ng-repeat="item in related">
-                 {{item.name}}
-       
-            </div>
-            </div>
-            </md-content>'
-	      ;
-	      break;     
+	   
   case "clientkk" :
         echo "kkkk";
         break;
