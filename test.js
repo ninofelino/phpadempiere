@@ -1,4 +1,4 @@
-var app = angular.module('demoApp', ['ngMaterial', 'ui.router', 'ngResource', 'md.data.table'])
+var app = angular.module('demoApp', ['ngMaterial', 'ui.router', 'ngResource', 'md.data.table','ngHolder'])
     .config(function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('pink')

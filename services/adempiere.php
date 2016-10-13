@@ -1,5 +1,4 @@
 <?php 
-
 function runsql($name,$sequel) {
   
   //$sqldb = pg_connect("host=localhost dbname=cendold1_adempiere user=cendold1_test password=2Sz8kSoUnHdM options='--client_encoding=UTF8'") or die(pg_last_error());
@@ -7,22 +6,14 @@ function runsql($name,$sequel) {
     // $sqldb->exec('SET search_path TO adempiere');
     $result=pg_query($sqldb,$sequel) or die(pg_last_error());
     $resultArray = pg_fetch_all($result);
-    
-    
-   // json_encode($resultArray);
-     while($row = pg_fetch_row($result)){
-    $hasil .=$row[0].',';
-   
-    
-      
-      
-      
-   }      
-   $hasil='['.$hasil.']';
-   $hasil=str_replace(',]', ']',$hasil);
-   echo $hasil;
-
-   }
+    // json_encode($resultArray);
+    while($row = pg_fetch_row($result)){
+          $hasil .=$row[0].',';    
+    }      
+    $hasil='['.$hasil.']';
+    $hasil=str_replace(',]', ']',$hasil);
+    echo $hasil;
+    }
 
 $method = $_SERVER['REQUEST_METHOD'];  //get post delete 
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
@@ -66,6 +57,37 @@ switch($request[0]) {
 
           runsql("tab",$sql);
           break;
+          case "ad_org":
+                $sql="
+           
+            select row_to_json(s) from
+            (
+            select  t.org,t.description,array_to_json(array_agg(row_to_json(t))) as client
+                   from 
+                   (select a.name as org,r.name,a.description  from ad_org a
+                    left outer join ad_client r on a.ad_org_id=r.ad_org_id
+                       ) t   
+                      group by 1,2
+             ) s  
+         
+                   
+            
+
+                ";
+                 $db = pg_connect("host=localhost dbname=adempiere user=adempiere password=adempiere");
+                 $x=0;
+
+              $result=pg_query($db,$sql) or die(pg_last_error());
+               $resultArray = pg_fetch_all($result);
+             //echo json_decode($resultArray);
+              while($row = pg_fetch_row($result)){
+              	$x=++$x;
+          $hasil .=$row[0].$row[1];    
+      }
+         // echo $hasil;
+         runsql("org",$sql);
+    
+          
   
 }
 

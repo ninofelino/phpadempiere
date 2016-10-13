@@ -1,44 +1,64 @@
 <felmenu></felmenu>
-lllllllllllllllllllllllllllllllllllllllllllllllllllllll
-<md-card>
-<md-card md-theme="dark-purple">
+kkkkkkkkkkk
+<script type="text/javascript">
+     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+
+
+</script>
+
+  <div class='md-padding' layout="row" flex>
+    <div layout="row" flex>
+      <div class="parent" layout="column" ng-repeat="user in related" flex>
+        <md-card>
+          <img src="http://placehold.it/150x150" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <h2>{{user.org}}</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+             
+            </p>
+          </md-card-content>
+          <div class="md-actions" layout="row" layout-align="end center">
+            <md-button>Save</md-button>
+            <md-button>View</md-button>
+          </div>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<md-card md-theme="dark-purple" >
   
   <div class="md-toolbar-tools">
     <span>{{title}}</span>
     {{related.count}}
+
     
   </div>
-<md-table-container>
-  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
-    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
-      <tr md-row>
-        <th md-column md-order-by="nameToLower"><span>id</span></th>
-        <th md-column md-numeric md-order-by="calories.value"><span>name</span></th>
-        <th md-column md-numeric>Value</th>
-        <th md-column md-numeric>Class</th>
-        <th md-column md-numeric>Protein (g)</th>
-        <th md-column md-numeric>Sodium (mg)</th>
-        <th md-column md-numeric>Calcium (%)</th>
-        <th md-column md-numeric>Iron (%)</th>
-      </tr>
-    </thead>
-    <tbody md-body>
+  <md-card-content layout="row" layout-wrap>
+  <div ng-repeat="item in related">
+  <md-card class="placeholder-example">
+        <md-toolbar>     
+        
+        <img holder="holder.js/200x200/text:?">
+<img holder data-src="holder.js/200x200/text:?">
+        {{item.org}}{{item.client.count}}
 
-      <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="dessert in related">
-        <td md-cell>{{dessert.id}}</td>
-        <td md-cell>{{dessert.name}}</td>
-        <td md-cell>{{dessert.value}}</td>
-        <td md-cell>{{dessert}}</td>
-        <td md-cell>{{dessert.protein.value | number: 1}}</td>
-        <td md-cell>{{dessert.sodium.value}}</td>
-        <td md-cell>{{dessert.calcium.value}}{{dessert.calcium.unit}}</td>
-        <td md-cell>{{dessert.iron.value}}{{dessert.iron.unit}}</td>
-      </tr>
-    </tbody>
-  </table>
-</md-table-container>
+        <span>
+           {{item.description}}
+       
+        </span>
+        </md-toolbar>
+        <div ng-repeat="x in item.client">
+             {{x.name}}
+             
+        </div>
 
-<md-table-pagination md-limit="4" md-limit-options="[5, 10, 15]" md-page="4" md-total="{{10}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+  </md-card>
+  </div>
+
 
 
    <md-card-content>

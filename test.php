@@ -3,7 +3,7 @@
 // url harus uniq
 $jsoon = '[
   {"url":"Administration","icon":"x.svg","dataSource":"select * from ad_menu","templateurl":[
-  {"url":"Organization","icon":"org.svg","templateurl":"org","datasource":"index.php/sql/select * from ad_org"},
+  {"url":"Organization","icon":"org.svg","templateurl":"org","datasource":"services/adempiere.php/ad_org"},
   {"url":"Client","icon":"client.svg","templateurl":"client","datasource":"index.php/sql/select * from ad_client"},
   {"url":"Roles","icon":"user.svg","templateurl":"role","datasource":"index.php/sql/select * from ad_role"},
   {"url":"User","icon":"user.svg","templateurl":"user","datasource":"index.php/sql/select * from ad_user"}

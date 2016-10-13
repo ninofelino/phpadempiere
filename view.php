@@ -46,47 +46,7 @@
   switch($request[0]) {
   case "other":
         break;   
-  case "tableu":
-        
-        //printf ("--[ Current Memory Limit: %s\n\n", ini_get('memory_limit'));
- 
-
-        echo
-        '
-        <md-grid-list
-        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
-        md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12px" md-gutter-gt-sm="8px" >
-             <md-grid-tile class="gray"
-        md-rowspan="3" md-colspan="4" md-colspan-sm="1" md-colspan-xs="1">
-      <md-grid-tile-footer>
-        <h3>#1: (3r x 2c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-            
-         <md-content><felmenu></felmenu></md-content>
-        <md-card  class="md-warn" style="border-radius: 3px 3px 0 0">
-                      
-            <md-card-content layout-padding>
-                  <div ng-repeat="item in related | limitTo: 25 ">
-                  <a sf-ref="sql/select * from {{item.tablename}} limit 25" >{{item.name}}</a>
-            </div> 
-            </md-card-content>
-                  <cl-paging flex cl-pages="paging.total" cl-steps="6" cl-page-changed="paging.onPageChanged()" cl-align="start start" cl-current-page="paging.current"></cl-paging>
-            <div>
-                <md-button><md-svg-icon="lib/next.svg"></md-svg-icon>P</md-button>
-                <md-button>Prev</md-button>
-         <md-button>Prev</md-button>
-         <md-button>Prev</md-button>
-         </div>
-        
-           
-         
-         </md-card>
-        
-        ';
-
-        break;   
+  
         
   case "roley" :
         echo '
@@ -126,7 +86,7 @@
         echo "kkkk";
         break;
 
-	case "client" :
+	case "clienit" :
          $js="<script>
             angular.module('demoApp').controller('Ctrl1', ['@scope', '@http', function(@scope, @http){
             @scope.test='hello';

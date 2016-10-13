@@ -1,6 +1,6 @@
 Adempiere object in php
 ./pg_dump -U adempiere -d adempiere | split -b 20m – adempiere.pgsql
-
+git commit -m phpfel
 models.php
       berisi file menu
 
