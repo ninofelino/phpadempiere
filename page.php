@@ -14,7 +14,7 @@
 <script src="lib/angular-resource.min.js"></script>
 <script src="lib/angular-material-icons.min.js"></script>
 <script src="lib/dist.min.js"></script>
-<script src="test.php"></script>
+<script src="core"></script>
 
 <script src="lib/holder.js"></script>
 <script src="lib/aholder.js"></script>
@@ -49,15 +49,7 @@
        <div id="content" ui-view>
        
        <felmenu></felmenu>
-      <?php
- $dh = opendir('C:/Users/nino/Documents/phpfel/images/24px');
- while ($file = readdir($dh))
- {
- echo '<img src="images/24px/'.$file.'" alt="l"></img>';
-}
- closedir($dh);
-
-?>
+     
       <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
       <md-progress-circular md-mode="indeterminate"></md-progress-circular>

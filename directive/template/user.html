@@ -1,13 +1,35 @@
 <felmenu></felmenu>
-<md-card>
-  <!--object-->
-  <div class="md-toolbar-tools">
-    <span>{{title}}</span>
-    {{related.count}}
-    {{related}}
-  </div>
 
-</md-card>
+<script type="text/javascript">
+     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+
+
+</script>
+<div>
+  <div class='md-padding' layout="row" layout-wrap>
+    <div layout="row" layout-wrap>
+      <div class="parent" layout="column" ng-repeat="user in related" flex>
+        <md-card>
+          <img src="http://placehold.it/150x50" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <h2>{{user.name}}</h2>
+            <p>
+              
+               <li>{{user.email}}</li>
+               <li>email: {{user.phone}}</li>
+
+            </p>
+          </md-card-content>
+          <div class="md-actions" layout="row" layout-align="end center">
+            <md-button>Save</md-button>
+            <md-button>View</md-button>
+          </div>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
    

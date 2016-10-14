@@ -5,12 +5,12 @@ kkkkkkkkkkk
 
 
 </script>
-
-  <div class='md-padding' layout="row" flex>
-    <div layout="row" flex>
+<div>
+  <div class='md-padding' layout="row" layout-wrap>
+    <div layout="row" layout-wrap>
       <div class="parent" layout="column" ng-repeat="user in related" flex>
         <md-card>
-          <img src="http://placehold.it/150x150" class="md-card-image" alt="user avatar">
+          <img src="http://placehold.it/150x50" class="md-card-image" alt="user avatar">
           <md-card-content>
             <h2>{{user.org}}</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
@@ -27,44 +27,6 @@ kkkkkkkkkkk
   </div>
 </div>
 
-
-
-<md-card md-theme="dark-purple" >
-  
-  <div class="md-toolbar-tools">
-    <span>{{title}}</span>
-    {{related.count}}
-
-    
-  </div>
-  <md-card-content layout="row" layout-wrap>
-  <div ng-repeat="item in related">
-  <md-card class="placeholder-example">
-        <md-toolbar>     
-        
-        <img holder="holder.js/200x200/text:?">
-<img holder data-src="holder.js/200x200/text:?">
-        {{item.org}}{{item.client.count}}
-
-        <span>
-           {{item.description}}
-       
-        </span>
-        </md-toolbar>
-        <div ng-repeat="x in item.client">
-             {{x.name}}
-             
-        </div>
-
-  </md-card>
-  </div>
-
-
-
-   <md-card-content>
-
-
-</md-card>
 
 
    

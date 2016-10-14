@@ -1,4 +1,9 @@
 <?php 
+require_once("SDatabase.inc.php");
+     $db = new SDatabase('../adempiere.json'); // Open database
+  
+
+
 function runsql($name,$sequel) {
   
   //$sqldb = pg_connect("host=localhost dbname=cendold1_adempiere user=cendold1_test password=2Sz8kSoUnHdM options='--client_encoding=UTF8'") or die(pg_last_error());
@@ -13,6 +18,11 @@ function runsql($name,$sequel) {
     $hasil='['.$hasil.']';
     $hasil=str_replace(',]', ']',$hasil);
     echo $hasil;
+    $db = new SDatabase('adempiere.json'); // Open database
+  
+    $db->data[$name]=preg_replace('/(\v|\s)+/', ' ', trim($sequel));
+  //  $db->data["info"]="adempiere";
+     $db->save();
     }
 
 $method = $_SERVER['REQUEST_METHOD'];  //get post delete 
@@ -20,7 +30,7 @@ $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $_SESSION["favcolor"] = "green";
 
 
-session_start();
+// session_start();
 
 $sqldb = pg_connect("host=localhost dbname=adempiere user=adempiere password=adempiere") or die(pg_last_error()) ;
 
@@ -28,10 +38,21 @@ $sqldb = pg_connect("host=localhost dbname=adempiere user=adempiere password=ade
 
 
 switch($request[0]) {
-	case "login" :
-          echo "list al object";
-	      echo  $method;
-	      echo  $_SESSION;
+  case "menu":
+
+       break;
+	case "db" :
+             switch($request[1]){
+              case "list":
+                  
+                    print_r($db->data);echo '<br>';
+              break;
+             }
+          echo $db->data[$request[1]];
+              
+
+
+              
 	      break;
 	case "tab"  :
 	      $sql="
@@ -86,6 +107,16 @@ switch($request[0]) {
       }
          // echo $hasil;
          runsql("org",$sql);
+         break;
+         case "ad_user":
+               $sql="
+                  select row_to_json(t) from
+                  (
+                  select name,phone,email,islocked,isactive from ad_user
+                  ) t
+               ";
+               runsql('user',$sql);
+         break;
     
           
   

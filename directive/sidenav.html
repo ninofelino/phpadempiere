@@ -14,18 +14,18 @@
 <!--  content menu -->                    
           <div ng-repeat="item in related">
             <md-menu-item>
-             <md-button  ui-sref="{{item.templateUrl}}">
+             <md-button  ui-sref="{{item.templateurl}}">
                   <md-icon md-svg-src="lib/{{item.icon}}"   class="s24" aria-label="Cake"></md-icon>
                   <b>{{item.url}}</b>
             </md-button>
             </md-menu-item>
             <!-- submenu --> 
-               <div ng-if="item.templateUrl.length>2">
+               <div ng-if="item.templateurl.length>2">
                   
-                  <div  class="md-accordion" ng-repeat="x in item.templateUrl">
+                  <div  class="md-accordion" ng-repeat="x in item.templateurl">
                         <md-menu-item>
 
-                       <md-button ui-sref="{{x.templateUrl}}">
+                       <md-button ui-sref="{{x.templateurl}}">
                           <md-icon    class="s24" aria-label="Cake"></md-icon>
                   <md-icon md-svg-src="lib/{{x.icon}}"   class="s24" aria-label="Cake"></md-icon>
                 
