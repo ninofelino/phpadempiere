@@ -15,9 +15,18 @@ switch($request[0]) {
              echo file_get_contents($filename);
         break;
     case  "libs":
-           $filename=str_replace('.', '_', $request[1]);
-           echo base64_decode(angular_min_js());
+           $fn=str_replace('.','X',$request[1]);
+           $fn=str_replace('-','Z',$fn);
+
+           echo base64_decode(call_user_func($fn));
            break;
+     case  "lib":
+           $fn=str_replace('.','X',$request[1]);
+           $fn=str_replace('-','Z',$fn);
+
+           echo base64_decode(call_user_func($fn));
+           break;
+
     case "core" :
           echo getstate();
           break;

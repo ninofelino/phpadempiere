@@ -3,25 +3,25 @@
 <html>
 <head>
 <title>ninofelino</title>
-<link rel="stylesheet" href="lib/angular-material.css">
-<script src="index.php/libs/angular_min_js"></script>
-<script src="lib/angular-animate.min.js"></script>
-<script src="lib/angular-aria.min.js"></script>
-<script src="lib/angular-material.min.js"></script>
-<link rel="stylesheet" href="lib/icon.css">
-<link rel="stylesheet" href="lib/angular-material.min.css">
-<script src="lib/angular-ui-router.js"></script>
-<script src="lib/angular-resource.min.js"></script>
-<script src="lib/angular-material-icons.min.js"></script>
-<script src="lib/dirPagination.js"></script>
+<link rel="stylesheet" href="../lib/angular-material.css">
+<script src="index.php/libs/angular.min.js"></script>
+<script src="index.php/libs/angular-animate.min.js"></script>
+<script src="index.php/libs/angular-aria.min.js"></script>
+<script src="index.php/libs/angular-material.min.js"></script>
+<link rel="stylesheet" href="index.php/libs/icon.css">
+<link rel="stylesheet" href="../lib/angular-material.min.css">
+<script src="index.php/libs/angular-ui-router.js"></script>
+<script src="index.php/libs/angular-resource.min.js"></script>
+<script src="index.php/libs/angular-material-icons.min.js"></script>
+<script src="index.php/libs/dirPagination.js"></script>
 
-<script src="lib/dist.min.js"></script>
+<script src="index.php/libs/dist.min.js"></script>
 <script src="index.php/core"></script>
 
-<script src="lib/holder.js"></script>
-<script src="lib/aholder.js"></script>
-<script src="lib/angular-material-paging.js"></script>
-<link rel="stylesheet" href="lib/angular-material-paging.css">
+<script src="index.php/libs/holder.js"></script>
+<script src="index.php/libs/aholder.js"></script>
+<script src="index.php/libs/angular-material-paging.js"></script>
+<link rel="stylesheet" href="index.php/libs/angular-material-paging.css">
 
 <link href="lib/md-data-table.css" rel="stylesheet" type="text/css"/>
 <!-- module -->

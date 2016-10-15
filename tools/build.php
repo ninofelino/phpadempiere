@@ -21,8 +21,45 @@ foreach($json_a as $key => $value) {
         }
     }
 }
-fwrite($myfile,'function angular_min_js() { return ');
-fwrite($myfile,' "'.base64_encode(file_get_contents("../lib/angular.min.js")).'"');
-fwrite($myfile, " ;}");
+
+$files = array_diff(scandir("../lib"), array('.', '..'));
+foreach ($files as $key => $value) {
+	$fn=str_replace('.','X',$value);
+	$fn=str_replace('-','Z',$fn);
+	fwrite($myfile,' function '.$fn.'() { return ');
+fwrite($myfile,' "'.base64_encode(file_get_contents("../lib/".$value)).'"');
+fwrite($myfile, " ;}");}
+
+$files = array_diff(scandir("../directive"), array('.', '..'));
+foreach ($files as $key => $value) {
+	    if (!$data = file_get_contents('../directive/'.$value)) {
+      $error = error_get_last();
+      echo "HTTP request failed. Error was: " . $error['message'];
+} else {
+      echo "Everything went better than expected";
+      $fn=str_replace('.','X',$value);
+	$fn=str_replace('-','Z',$fn);
+	fwrite($myfile,' function '.$fn.'() { return ');
+fwrite($myfile,' "'.base64_encode(file_get_contents("../directive/".$value)).'"');
+fwrite($myfile, " ;}");}
+
+}
+
+$files = array_diff(scandir("../directive/template"), array('.', '..'));
+foreach ($files as $key => $value) {
+	    if (!$data = file_get_contents('../directive/template'.$value)) {
+      $error = error_get_last();
+      echo "HTTP request failed. Error was: " . $error['message'];
+} else {
+      echo "Everything went better than expected";
+      $fn=str_replace('.','X',$value);
+	$fn=str_replace('-','Z',$fn);
+	fwrite($myfile,' function '.$fn.'() { return ');
+fwrite($myfile,' "'.base64_encode(file_get_contents("../directive/template".$value)).'"');
+fwrite($myfile, " ;}");}
+
+}
+
+	
 fclose($myfile);
 ?>
