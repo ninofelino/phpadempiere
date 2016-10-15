@@ -1,9 +1,66 @@
-<?php 
-include_once('./lib/SDatabase.inc.php');
-include_once('menu.php');
+<?php
+ //$sqldb = pg_connect("host=localhost dbname=cendold1_adempiere user=cendold1_test password=2Sz8kSoUnHdM options='--client_encoding=UTF8'") or die(pg_last_error());
 $sqldb = pg_connect("host=localhost dbname=adempiere user=adempiere password=adempiere") or die(pg_last_error()) ;
+$method = $_SERVER['REQUEST_METHOD'];  //get post delete 
+$request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
+$input = json_decode(file_get_contents('php://input'),true);
 
-$db = new SDatabase('adempiere.json'); // Open database
+switch($request[0]) {
+  case "test" :
+           echo base64_decode(call_user_func('user')); 
+     
+       break;
+  case "view" :
+         $filename='directive/template/'.$request[1].'.html';
+             echo file_get_contents($filename);
+        break;
+    case  "libs":
+           $filename=str_replace('.', '_', $request[1]);
+           echo base64_decode(angular_min_js());
+           break;
+    case "core" :
+          echo getstate();
+          break;
+    case "sql": 
+        $name="sql";
+        $sql=$request[1];
+             // $result=pg_query($GLOBALS['sqldb'],$sql) or die(pg_last_error()); 
+
+            runsql("field",$sql);
+          break;
+    case "images": 
+          $dh = opendir('images/24px');
+          while ($file = readdir($dh))
+          {
+            echo '<md-button  class="md-fab md-primary md-hue-2"><img src="images/24px/'.$file.'" alt="l"></img></md-button>';
+          }
+          closedir($dh);
+          $name="sql";
+          $sql="select a.name,a.isactive,(select count(name) from m_product where m_product_category_id=a.m_product_category_id) as cn from m_product_category a";
+          runsql("field",$sql);
+          break;
+    
+    case "login":
+          $name="login";
+          $sql="select name,password,isactive from ad_user";
+          runsql($name,$sql);
+          break;
+
+    case "menu": 
+        $name="menu";
+          echo base64_decode(menu()); 
+          break;
+  
+    default : 
+             echo base64_decode(page_php());
+            
+
+}
+
+      
+ 
+
+
 
 function state($resu)
 {
@@ -25,10 +82,7 @@ function getstate()
 
  
 //$resul = json_decode ($GLOBALS['jsoon']);
-$resul = json_decode($GLOBALS['db']->data['menu']);
-$jsoon=preg_replace("/[\n\r]/","",$GLOBALS['jsoon']);
-$GLOBALS['db']->data["menu"]=trim($jsoon);
-$GLOBALS['db']->save();
+$resul = json_decode(base64_decode(menu()));
 
 
 $js = "
@@ -66,7 +120,7 @@ function(@scope,@mdSidenav,@http,@mdDialog){
     )
   };
    
-      @http.get('services/adempiere.php/db/menu')
+      @http.get('index.php/menu')
             .then(function(response){ @scope.related = response.data; });
           
      
@@ -121,8 +175,8 @@ function runsql($name,$sequel) {
      echo json_encode($resultArray);
    }
 
-   
-
+function route()   
+{
 $method = $_SERVER['REQUEST_METHOD'];  //get post delete 
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
@@ -200,10 +254,9 @@ switch($request[0]) {
 
 }
 
-	    
+}	    
  
 
 
 
 
-?>

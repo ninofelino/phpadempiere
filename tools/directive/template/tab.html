@@ -1,0 +1,41 @@
+<felmenu></felmenu>
+
+
+
+<md-card>
+<md-card md-theme="dark-purple">
+  
+  <div class="md-toolbar-tools">
+    <span>{{title}}</span>
+    {{related.count}}
+    
+  </div>
+
+
+
+   <md-tabs md-dynamic-height md-border-bottom>
+<div ng-repeat="item in related" >
+     {{item.tab}}
+           <md-tab label={{item.tab}} >
+           <md-content  layout="row" layout-wrap>
+ 
+                   <div ng-repeat="f in item.field">
+                         <md-input-container flex="100">
+                       <label>{{f.name}}</label><input></input>
+                       </md-input-container>
+                   </div>
+            </md-content>
+</md-tab>
+</div>
+</md-tabs>
+<md-table-pagination md-limit="4" md-limit-options="[5, 10, 15]" md-page="4" md-total="{{10}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+
+
+
+</md-tab>   <md-card-content>
+</md-card-contmd-tabs>
+
+</md-card>
+
+
+   

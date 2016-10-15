@@ -4,7 +4,7 @@
 <head>
 <title>ninofelino</title>
 <link rel="stylesheet" href="lib/angular-material.css">
-<script src="lib/angular.min.js"></script>
+<script src="index.php/libs/angular_min_js"></script>
 <script src="lib/angular-animate.min.js"></script>
 <script src="lib/angular-aria.min.js"></script>
 <script src="lib/angular-material.min.js"></script>

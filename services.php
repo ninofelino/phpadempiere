@@ -111,16 +111,11 @@ switch($request[0]) {
          // echo $hasil;
          runsql("org",$sql);
          break;
-        
-         case "ad_col":
+         case "ad_user":
                $sql="
-                   select row_to_json(t) from
+                  select row_to_json(t) from
                   (
-                  select ad_reference_id,(select name from ad_reference where ad_reference_id=a.ad_reference_id),
-                  defaultvalue,isupdateable,ismandatory,(select name from ad_process where ad_process_id=a.ad_process_id),
-                  (select tablename from ad_table where ad_table_id=a.ad_table_Id),a.columnname,ad_table_id
-                    from 
-                  ad_column a  where ad_table_id=100 order by a.ad_column_Id
+                  select name,phone,email,islocked,isactive from ad_user
                   ) t
                ";
                runsql('user',$sql);

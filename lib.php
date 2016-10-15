@@ -1,31 +1,20 @@
 <felmenu></felmenu>
-
+{{title}}
 <script type="text/javascript">
      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
 
 
 </script>
 <div>
-  <md-virtual-repeat-container id="vertical-container">
-      <div md-virtual-repeat="item in related.dynamicItems" md-on-demand
-          class="repeated-item" >
-        {{item}}
-      </div>
-    </md-virtual-repeat-container> 
-
-
-  <div class="md-padding" layout="row" layout-wrap>
+  <div class='md-padding' layout="row" layout-wrap>
     <div layout="row" layout-wrap>
-      <div class="parent" layout="column" ng-repeat="user in related" flex>
+      <div class="parent" layout="column" ng-repeat="item in related" flex>
         <md-card>
           <img src="http://placehold.it/150x50" class="md-card-image" alt="user avatar">
           <md-card-content>
-            <h2>{{user.name}}</h2>
-            <p>
-              
-               <li>{{user.email}}</li>
-               <li>email: {{user.phone}}</li>
-
+            <h2>{{item.name}}</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+             
             </p>
           </md-card-content>
           <div class="md-actions" layout="row" layout-align="end center">
