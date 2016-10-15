@@ -14,7 +14,7 @@ foreach ($resu as $hasil) {
         $x=$x+1;
         $nama=$hasil->templateurl;
         if (is_array($ar)) { $nama="arr".$x;}
-        $hs .=".state('".$nama."',{templateUrl:'view/".$ar."',controller: function(@scope,@http,@stateParams,@timeout) {@scope.title=''; @http.get('".$hasil->datasource."').then(function(response){ @scope.related = response.data; });}}) " ;   
+        $hs .=".state('".$nama."',{templateUrl:'index.php/view/".$nama."',controller: function(@scope,@http,@stateParams,@timeout) {@scope.title=''; @http.get('".$hasil->datasource."').then(function(response){ @scope.related = response.data; });}}) " ;   
           if (is_array($ar)) { $hs.=state($ar);}
         }
 return str_replace("@","$", $hs);
@@ -139,10 +139,18 @@ switch($request[0]) {
              echo "The file $filename does not exist";
              echo '<std></std>'  ;
              copy('directive/default.html',$filename);
+             $isifile=file_get_contents($filename, FILE_USE_INCLUDE_PATH);
+             $db->data[$request[1]]=$isifile;
+             $db->save();
+             echo $db->data[$request[1]];
              }
 	      break;
-    case  "libs":
+    case  "lib":
            $isi=file_get_contents('lib/'.$request[1]);
+           if (!$isi) {
+                     copy('lib/X.svg','lib/'.$request[1]); 
+                      }
+
            $nama=str_replace('-.', '_',$request[1]);
            $db->data[$nama]=$isi;
            $db->save();
@@ -170,7 +178,7 @@ switch($request[0]) {
           runsql("field",$sql);
           break;
     
-    case "login":
+    case "login4":
           $name="login";
           $sql="select name,password,isactive from ad_user";
           runsql($name,$sql);
@@ -195,6 +203,11 @@ switch($request[0]) {
            $filehtml=file_get_contents('page.php', FILE_USE_INCLUDE_PATH);
            $db->data["page.php"]=$filehtml;
            $db->save();
+
+           $filehtml=file_get_contents('tools/pagetest.php', FILE_USE_INCLUDE_PATH);
+           $db->data["pagetest.php"]=$filehtml;
+           $db->save();
+
            echo $db->data["page.php"];
 
 

@@ -3,13 +3,13 @@
 <html>
 <head>
 <title>ninofelino</title>
-<link rel="stylesheet" href="../lib/angular-material.css">
+<link rel="stylesheet" href="index.php/style/angular-material.css">
 <script src="index.php/libs/angular.min.js"></script>
 <script src="index.php/libs/angular-animate.min.js"></script>
 <script src="index.php/libs/angular-aria.min.js"></script>
 <script src="index.php/libs/angular-material.min.js"></script>
-<link rel="stylesheet" href="index.php/libs/icon.css">
-<link rel="stylesheet" href="../lib/angular-material.min.css">
+<link rel="stylesheet" href="index.php/style/icon.css">
+<link rel="stylesheet" href="index.php/style/angular-material.min.css">
 <script src="index.php/libs/angular-ui-router.js"></script>
 <script src="index.php/libs/angular-resource.min.js"></script>
 <script src="index.php/libs/angular-material-icons.min.js"></script>
@@ -23,7 +23,7 @@
 <script src="index.php/libs/angular-material-paging.js"></script>
 <link rel="stylesheet" href="index.php/libs/angular-material-paging.css">
 
-<link href="lib/md-data-table.css" rel="stylesheet" type="text/css"/>
+<link href="index.php/style/md-data-table.css" rel="stylesheet" type="text/css"/>
 <!-- module -->
 <script type="text/javascript" src="lib/md-data-table.js"></script>
 

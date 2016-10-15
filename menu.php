@@ -4,7 +4,7 @@ $jsoon = '[
   {"url":"Organization","icon":"org.svg","templateurl":"org","datasource":"services/adempiere.php/ad_org"},
   {"url":"Client","icon":"client.svg","templateurl":"client","datasource":"index.php/sql/select * from ad_client"},
   {"url":"Roles","icon":"user.svg","templateurl":"role","datasource":"index.php/sql/select * from ad_role"},
-  {"url":"User","icon":"user.svg","templateurl":"user","datasource":"services/adempiere.php/ad_user"}
+  {"url":"User","icon":"user.svg","templateurl":"user","datasource":"index.php/sql/select * from ad_user"}
                                                                   
                                    ]},
                      {"url":"Window","icon":"window.svg","templateurl":[
@@ -20,7 +20,7 @@ $jsoon = '[
          {"url":"Sql","icon":"sql.svg","templateurl":[
                      {"url":"product2","icon":"product.svg","templateurl":"product1"},
                      {"url":"Bussiness","icon":"bpartner.svg","templateurl":"produc5t"},
-                     {"url":"product","templateurl":"product"},
+                     {"url":"Logon","templateurl":"logon","datasource":"select * from ad_user"},
                      {"url":"icon","templateurl":"icon"}
 
                                    ]}

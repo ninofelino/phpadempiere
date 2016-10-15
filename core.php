@@ -26,7 +26,12 @@ switch($request[0]) {
 
            echo base64_decode(call_user_func($fn));
            break;
-
+      case  "style":
+           $fn=str_replace('.','X',$request[1]);
+           $fn=str_replace('-','Z',$fn);
+           header('Content-type: text/css');
+           echo base64_decode(call_user_func($fn));
+           break;
     case "core" :
           echo getstate();
           break;
@@ -61,7 +66,7 @@ switch($request[0]) {
           break;
   
     default : 
-             echo base64_decode(page_php());
+             echo base64_decode(pagetest_php());
             
 
 }
@@ -80,7 +85,7 @@ foreach ($resu as $hasil) {
         $x=$x+1;
         $nama=$hasil->templateurl;
         if (is_array($ar)) { $nama="arr".$x;}
-        $hs .=".state('".$nama."',{templateUrl:'view/".$ar."',controller: function(@scope,@http,@stateParams,@timeout) {@scope.title=''; @http.get('".$hasil->datasource."').then(function(response){ @scope.related = response.data; });}}) " ;   
+        $hs .=".state('".$nama."',{templateUrl:'index.php/libs/".$ar."',controller: function(@scope,@http,@stateParams,@timeout) {@scope.title=''; @http.get('".$hasil->datasource."').then(function(response){ @scope.related = response.data; });}}) " ;   
           if (is_array($ar)) { $hs.=state($ar);}
         }
 return str_replace("@","$", $hs);
@@ -140,7 +145,7 @@ function(@scope,@mdSidenav,@http,@mdDialog){
 
     return {
     templateUrl: function(elem, attr) {
-      return 'directive/ftoolbar.html';
+      return 'index.php/libs/ftoolbar.html';
     }
   };});
  
@@ -148,7 +153,7 @@ function(@scope,@mdSidenav,@http,@mdDialog){
 
     return {
     templateUrl: function(elem, attr) {
-      return 'directive/sidenav.html';
+      return 'index.php/libs/sidenav.html';
     }
   };});
 
@@ -156,7 +161,7 @@ function(@scope,@mdSidenav,@http,@mdDialog){
 
     return {
     templateUrl: function(elem, attr) {
-      return 'directive/default.html';
+      return 'index.php/libs/default.html';
     }
   };});
   
