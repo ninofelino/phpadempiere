@@ -51,7 +51,8 @@
        <div id="content" ui-view>
        
        <felmenu></felmenu>
-     
+        <md-button ui-sref="tool/build.php">Build</md-button>
+        <a href="tools/build.php">Application Builder</a>
       <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
       <md-progress-circular md-mode="indeterminate"></md-progress-circular>
