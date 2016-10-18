@@ -59,7 +59,7 @@ class erp
             
 	        
 
-	    $db->data['ad_reference']=" 
+	    $db->data['ad_table']=" 
 	          select row_to_json(t) from
                   (
                   select ad_reference_id,(select name from ad_reference where ad_reference_id=a.ad_reference_id),
@@ -70,11 +70,11 @@ class erp
                   ) t
                
 	       ";
-	    $db->data["ad_table"]="
+	    $db->data["ad_reference"]="
                 select row_to_json(t) from
                 (
-	              select a.ad_window_id,a.name,a.name from ad_table a
-                limit 100
+	              select * from ad_reference a
+                order by ad_reference_id
 	              ) t
 	             ";
 

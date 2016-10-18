@@ -2,6 +2,8 @@
 <html ng-app="myApp">
 <head>
 	<title></title>
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
+
     <script src="../lib/angular.min.js"></script>
     <script src="../lib/angular-ui-router.js"></script>
     <script src="../lib/dirPagination.js"></script>
@@ -10,6 +12,14 @@
             <ul>
             <?php
                  echo "from php";
+                 echo "<br> memory";
+echo memory_get_peak_usage();
+echo "<br>";
+//echo var_dump($erp->loadobj());
+//$erp->initObj();
+// echo var_dump($erp->db);
+echo "--------------------------------";
+echo "<br>";
             ?>
             <li ng-repeat="value in related">
                 {{value.name}}
@@ -18,6 +28,56 @@
             
             </ul>
     </script>
+
+    <script type="text/ng-template" id="/ad_window.php">
+            <h4>Inline Template</h4>
+            <ul>
+            <?php
+                 echo "Ad_Window";
+            ?>
+            <pre>
+            Window merupakan Container Untuk Tab , didalam
+            tab terdapat field didalan field
+            dibagi dengan reference yang salahsatunya adalah column
+             terdapat column
+            </pre>
+            <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+            <li ng-repeat="value in related | limitTo:10">
+                <a href="">{{value.name}}</a>
+        
+            </li>
+            
+            </ul>
+    </script>
+
+    <script type="text/ng-template" id="/ad_field.php">
+            <h4>Inline Template</h4>
+            <ul>
+            <?php
+                 echo "ad_field";
+            ?>
+            <pre>
+             Field merupkan container untul table-direc
+            </pre>
+            <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+            <li ng-repeat="value in related | limitTo:10">
+                <a href="">{{value.name}}</a>
+        
+            </li>
+            
+            </ul>
+    </script>
+    
      <script type="text/ng-template" id="template.php">
             <h4>Inline Template</h4>
             <ul>
@@ -57,11 +117,20 @@ state parameter  {{id}}
         		     templateUrl:"template.php"})
         	.state('ad_table',{
                      controller:"adtable",
-        		     url:"/ad_table/:id",
-        		     templateUrl:"/te.php"})	   
+                     url:"/ad_table/:id",
+                     templateUrl:"template/ad_table.php"})    
+            .state('ad_field',{
+                     controller:"adfield",
+                     url:"/ad_field/:id",
+                     templateUrl:"/ad_field.php"}) 
+            .state('ad_reference',{
+                     controller:"adreference",
+                     url:"/ad_reference/:id",
+                     templateUrl:"template/ad_reference.php"})   
+
         	.state('ad_window',{
         		     url:"/ad_window",
-        		     templateUrl:"template.php",
+        		     templateUrl:"/ad_window.php",
         		     controller:"myCtrl"})
 
         });
@@ -70,12 +139,19 @@ state parameter  {{id}}
        	$scope.id = $stateParams.id;
 
         $scope.related = response.data;});});
-
-        app.controller('adtab', function($scope, $http,$stateParams) 
+         app.controller('adtab', function($scope, $http,$stateParams) 
        {$http.get("index.php/ad_tab/"+$stateParams.id).then(function(response) {
         $scope.id = $stateParams.id;
         $scope.title ='tab';
         $scope.related = response.data;});});
+
+         app.controller('adreference', function($scope, $http,$stateParams) 
+       {$http.get("index.php/ad_reference/"+$stateParams.id).then(function(response) {
+        $scope.id = $stateParams.id;
+        $scope.title ='Reference';
+        $scope.related = response.data;});}); 
+       
+
         
         app.controller('adtable', function($scope, $http,$stateParams) 
        {$http.get("index.php/ad_table/"+$stateParams.id).then(function(response) {
@@ -84,72 +160,7 @@ state parameter  {{id}}
         $scope.related = response.data;});});
 
     </script>
-    <style type="text/css">
-ul.tree, ul.tree ul {
-     list-style-type: none;
-   }
-
-   ul.tree, ul.tree ul {
-     list-style-type: none;
-     background: url(vline.png) repeat-y;
-     margin: 0;
-     padding: 0;
-   }
    
-   ul.tree ul {
-     margin-left: 10px;
-   }
-
-   ul.tree li {
-     margin: 0;
-     padding: 0 12px;
-   }
-   ul.tree, ul.tree ul {
-     list-style-type: none;
-     background: url(vline.png) repeat-y;
-     margin: 0;
-     padding: 0;
-   }
-   
-   ul.tree ul {
-     margin-left: 10px;
-   }
-
-   ul.tree li {
-     margin: 0;
-     padding: 0 12px;
-     line-height: 20px;
-     background: url(node.png) no-repeat;
-     color: #369;
-     font-weight: bold;
-
-   ul.tree, ul.tree ul {
-     list-style-type: none;
-     background: url(vline.png) repeat-y;
-     margin: 0;
-     padding: 0;
-   }
-   
-   ul.tree ul {
-     margin-left: 10px;
-   }
-
-   ul.tree li {
-     margin: 0;
-     padding: 0 12px;
-     line-height: 20px;
-     background: url(node.png) no-repeat;
-     color: #369;
-     font-weight: bold;
-   }
-
-   ul.tree li.last {
-     background: #fff url(lastnode.png) no-repeat;
-   }
-
-   }
-</style>
-
 </head>
 <body ng-app="myApp">
 <?php
@@ -157,14 +168,21 @@ echo var_dump($_SERVER['PATH_INFO']);
 ?>
 <a ng-click="currentTpl='templateUrl.html'" id="tpl-link">Load inlined template</a>
 <div id="tpl-content" ng-include src="currentTpl"></div>
-<a ui-sref="ad_tab">Tab</a>
-<a ui-sref="ad_window">Window</a>
-<a ui-sref="ad_tab">Field</a>
-<a ui-sref="ad_table" ui-sref-active="active">Table</a>
-<a ui-sref="ad_tab({id:100})">Tab with parameter</a>
-<a ui-sref="ad_tab/:party" ui-sref-active="active">Tab with parameter</a>
-<a ui-sref="ad_tab({id:'party'})">Tab with parameter</a>
 
+
+
+
+<ol class="breadcrumb">
+<a class="breadcrumb-item" ui-sref="ad_window">Window</a>
+<a class="breadcrumb-item" ui-sref="ad_tab">Tab</a>
+<a class="breadcrumb-item" ui-sref="ad_field">Field</a>
+<a class="breadcrumb-item" ui-sref="ad_table" ui-sref-active="active">Table</a>
+<a class="breadcrumb-item" ui-sref="ad_reference">Reference</a>
+<a class="breadcrumb-item" ui-sref="ad_tab({id:100})">Tab with parameter</a>
+
+<a class="breadcrumb-item" ui-sref="ad_tab/:party" ui-sref-active="active">Tab with parameter</a>
+<a class="breadcrumb-item" ui-sref="ad_tab({id:'party'})">Tab with parameter</a>
+</ol>
 
 <div ui-view></div>
 
@@ -177,14 +195,7 @@ echo var_dump($_SERVER['PATH_INFO']);
 include '../services/erp.php';
 ini_set('memory_limit','16M');
 $erp=new erp;
-echo "<br> memory";
-echo memory_get_peak_usage();
-echo "<br>";
-//echo var_dump($erp->loadobj());
-//$erp->initObj();
-// echo var_dump($erp->db);
-echo "--------------------------------";
-echo "<br>";
+
 //echo $erp->exec('ad_window');
 ?>
 </body>
