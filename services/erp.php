@@ -13,13 +13,13 @@ class erp
     function get_tab(){
              return exec('ad_tab');
     }
-    function exec($sequel)
+    function exec($sequel,$whereClause)
     {
-
+        error_log("sequel is :".$sequel);
         $sqldb = pg_connect("host=localhost dbname=adempiere user=adempiere password=adempiere") or die(pg_last_error()) ;
         $db = new SDatabase('../erpclass.json'); // Open database
    
-        $result=pg_query($sqldb,$db->data[$sequel]) or die($result="error:".$sequel);
+        $result=pg_query($sqldb,$db->data[$sequel]) or die(error_log($sequel));
         $resultArray = pg_fetch_all($result);
      //   return json_encode($resultArray);
         //return $resultArray;
@@ -59,7 +59,7 @@ class erp
             
 	        
 
-	    $sql=" 
+	    $db->data['ad_reference']=" 
 	          select row_to_json(t) from
                   (
                   select ad_reference_id,(select name from ad_reference where ad_reference_id=a.ad_reference_id),
@@ -70,10 +70,13 @@ class erp
                   ) t
                
 	       ";
-	    $db->data["ad_table"]=preg_replace('/(\v|\s)+/', ' ',"
-	              select a.ad_window_id,a.name,b.name from ad_window a
-	              left outer join ad_tab b on a.ad_tab_id=b.ad_tab_id 
-	             ");
+	    $db->data["ad_table"]="
+                select row_to_json(t) from
+                (
+	              select a.ad_window_id,a.name,a.name from ad_table a
+                limit 100
+	              ) t
+	             ";
 
 	    
 	    $db->data["ad_window"]="
