@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html lang="en" >
 <head>
 	<title></title>
-    <link rel="stylesheet" href="../lib/bootstrap.min.css">
-
-    <script src="../lib/angular.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+   
+   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+   <script src="js/angular-material.min.js"></script>
+ <script src="js/angular-material.min.js"></script>
+  <!-- Angular Material Library -->
     <script src="../lib/angular-ui-router.js"></script>
     <script src="../lib/dirPagination.js"></script>
     <script type="text/ng-template" id="/te.php">
@@ -103,10 +108,10 @@ state parameter  {{id}}
             </ul>
     </script>
     <script>
-       var app = angular.module('myApp', ['ui.router','angularUtils.directives.dirPagination']);
+       var app = angular.module('myApp', ['ngMaterial','ui.router']);
        app.config(function($stateProvider,$urlRouterProvider)
         {
-        	$urlRouterProvider.otherwise('/home/ad_window/');
+        	$urlRouterProvider.otherwise('/tab/dash');
     
         	$stateProvider
         	
@@ -132,6 +137,10 @@ state parameter  {{id}}
         		     url:"/ad_window",
         		     templateUrl:"/ad_window.php",
         		     controller:"myCtrl"})
+            .state('window',{
+                     url:"/window",
+                     templateUrl:"template/window.php",
+                     controller:"window"})
 
         });
        app.controller('myCtrl', function($scope, $http,$stateParams) 
@@ -151,7 +160,11 @@ state parameter  {{id}}
         $scope.title ='Reference';
         $scope.related = response.data;});}); 
        
-
+          app.controller('window', function($scope, $http,$stateParams) 
+       {$http.get("index.php/window/"+$stateParams.id).then(function(response) {
+        $scope.id = $stateParams.id;
+        $scope.title ='Reference';
+        $scope.related = response.data;});}); 
         
         app.controller('adtable', function($scope, $http,$stateParams) 
        {$http.get("index.php/ad_table/"+$stateParams.id).then(function(response) {
@@ -159,6 +172,10 @@ state parameter  {{id}}
         $scope.title ='tab';
         $scope.related = response.data;});});
 
+        
+        
+        
+          
     </script>
    
 </head>
@@ -178,6 +195,9 @@ echo var_dump($_SERVER['PATH_INFO']);
 <a class="breadcrumb-item" ui-sref="ad_field">Field</a>
 <a class="breadcrumb-item" ui-sref="ad_table" ui-sref-active="active">Table</a>
 <a class="breadcrumb-item" ui-sref="ad_reference">Reference</a>
+<a class="breadcrumb-item" ui-sref="window"  ui-sref-active="active">window</a>
+
+<a class="breadcrumb-item" href="php/adminer.php" ui-sref-active="active">Adminer</a>
 <a class="breadcrumb-item" ui-sref="ad_tab({id:100})">Tab with parameter</a>
 
 <a class="breadcrumb-item" ui-sref="ad_tab/:party" ui-sref-active="active">Tab with parameter</a>
