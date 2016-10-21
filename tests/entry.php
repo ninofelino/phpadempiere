@@ -18,38 +18,43 @@
         {
         	$urlRouterProvider.otherwise('/tab/dash');
 	     }	);
-     <?php
-     // create angular controller;
-     // get model
-     // ini_set("allow_url_fopen", 1);
-    // $json=file_get_contents("index.php/window")
- include "php/erp.php";
+         app.controller('ctrl',function($scope)
+
+         {
+         	<?php
+         	   include "php/erp.php";
      $erp = new erp;
      $json=json_decode($erp->exec('window','window'),true);
-     ?>
-        
+               foreach ($json as $key => $value){
+               	        foreach($value['field'] as $keye => $values)
+               	        {
+                           switch($values['refid']) {
+                          	case '19':
+                          	 echo '$scope'.'.'.$values['columnname'].' = [';
+                        
+                          	      foreach($values['select'] as $keyeee=>$valuess)
+                                 {
+                                 	echo '{name:"'.$valuess['name'].'"},';
+                                 };  
+                                 echo'{name:"eof"}';
+               	       	     echo ']; ';
+                          	break;
+                                                    };
+                        } ;                       
+                          
+               };
+         	//  echo '$scope.adorg=[{name:"*"},{name:"store1"}];'
+         	?>
+         });
+       
      </script>
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="ctrl">
  
  <md-toolbar>
 
     <div class="md-toolbar-tools">
       <span>Adempiere Klonengan</span>
-<md-button class="md-fab-toolbar" aria-label="undo">
-     <img class="png-icon" src="../images/24px/Undo24.png"></img>
-     <md-tooltip md-direction="bottom">Undo</md-tooltip>
-</md-button>
-      <md-button href="../services/adminer.php" class="md-fab-toolbar" aria-label="Help"><img class="png-icon" src="../images/24px/help24.png"></md-button>
-      <md-button aria-label="New"><img src="../images/24px/new24.png"></md-button>
-<md-button class="md-fab-toolbar" aria-label="Delete">
-    <md-icon md-svg-src="../images/24px/delete24.svg"></md-icon>
-
-</md-button>
-<md-button aria-label="D multiple"><img src="../images/24px/help24.png"></md-button>
-<md-button aria-label="Refresh"><img src="../images/24px/refresh24.png"></md-button>
-<md-button aria-label="Search"><img src="../images/24px/Zoom24.png"></md-button>
-<md-button aria-label="Attachment"><img src="../images/24px/Attachment24.png"></md-button>
 
 
 
@@ -67,48 +72,90 @@
                          ng-class="demo.selectedMode">
         <md-fab-trigger>
           <md-button aria-label="menu" class="md-fab md-warn">
-            <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+            <md-icon md-svg-src="../images/24px/ic_menu_black_36px.svg"></md-icon>
           </md-button>
         </md-fab-trigger>
 
         <md-fab-actions>
           <md-button aria-label="undo" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="../images/24px/undo24.svg" aria-label="undo"></md-icon>
+            <md-icon md-svg-src="../images/24px/ic_undo_black_24px.svg" aria-label="undo"></md-icon>
             <md-tooltip md-direction="bottom">Undo</md-tooltip>
 
           </md-button>
           <md-button aria-label="Help" class="md-fab md-raised md-mini">
           <md-tooltip md-direction="bottom">Help</md-tooltip>
 
-            <md-icon md-svg-src="../images/24px/help24.svg" aria-label="help"></md-icon>
+            <md-icon md-svg-src="../images/24px/ic_help_outline_black_36px.svg" aria-label="help"></md-icon>
           </md-button>
 
         <md-button aria-label="New" class="md-fab md-raised md-mini">
-        <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+        <md-icon md-svg-src="../images/24px/ic_create_new_folder_black_36px.svg" aria-label="Google Hangout"></md-icon>
             <md-tooltip md-direction="bottom">new</md-tooltip>
         </md-button>
          
          <md-button aria-label="delete" class="md-fab md-raised md-mini">
-        <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+        <md-icon md-svg-src="../images/24px/ic_delete_forever_black_36px.svg" aria-label="Google Hangout"></md-icon>
             <md-tooltip md-direction="bottom">delete</md-tooltip>
         </md-button>
 
          <md-button aria-label="refreh" class="md-fab md-raised md-mini">
-        <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+        <md-icon md-svg-src="../images/24px/ic_refresh_black_36px.svg" aria-label="Google Hangout"></md-icon>
             <md-tooltip md-direction="bottom">refresh</md-tooltip>
         </md-button>
 
          <md-button aria-label="Search" class="md-fab md-raised md-mini">
-        <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+        <md-icon md-svg-src="../images/24px/ic_search_black_36px.svg" aria-label="Google Hangout"></md-icon>
             <md-tooltip md-direction="bottom">search</md-tooltip>
         </md-button>
 
-         <md-button aria-label="New" class="md-fab md-raised md-mini">
-        <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
-            <md-tooltip md-direction="bottom">new</md-tooltip>
+         <md-button aria-label="Attachment" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_attachment_black_36px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">Attachment</md-tooltip>
+        </md-button>
+        
+          <md-button aria-label="Chat" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_chat_black_36px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">chat</md-tooltip>
         </md-button>
 
+          <md-button aria-label="grid" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_grid_on_black_36px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">Grid</md-tooltip>
+        </md-button>
 
+          <md-button aria-label="history" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_history_black_24px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">History</md-tooltip>
+        </md-button>
+           <md-button aria-label="home" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_home_black_24px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">home</md-tooltip>
+        </md-button>
+
+              <md-button aria-label="prev" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_keyboard_arrow_left_black_24px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">prev</md-tooltip>
+        </md-button>
+
+              <md-button aria-label="home" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_keyboard_arrow_right_black_24px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">home</md-tooltip>
+        </md-button>
+
+                <md-button aria-label="home" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_keyboard_arrow_up_black_24px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">home</md-tooltip>
+        </md-button>
+
+                <md-button aria-label="home" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_keyboard_arrow_down_black_24px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">home</md-tooltip>
+        </md-button>
+
+                <md-button aria-label="home" class="md-fab md-raised md-mini">
+        <md-icon md-svg-src="../images/24px/ic_print_black_24px.svg" aria-label="Google Hangout"></md-icon>
+            <md-tooltip md-direction="bottom">print</md-tooltip>
+        </md-button>
         </md-fab-actions>
       </md-fab-speed-dial>
     </div>
@@ -127,7 +174,11 @@
            	        foreach ($value['field'] as $keye => $values) {
            	        	     $reference=$values['reference'];
            	        	     echo '<md-input-container style="width:30%">';
-           	        	     echo'<md-tooltip>'.$reference.'</md-tooltip>';
+           	        	     echo'<md-tooltip md-direction="top">'.$reference
+                             .$values['refid']
+                             ."column:"
+                             .$values['columnname']
+           	        	     .'</md-tooltip>';
            	        	     switch ($reference) {
            	        	     	case 'Date':
            	        	     	 echo "<label>".$values['name']."</label>";
@@ -150,11 +201,29 @@
            	        	     	case 'Button':
            	        	     	      echo '<md-button>'.$values['name'].'</md-button>';
            	        	     	     break;
+           	        	     	case 'Table Direct':
+           	        	     	        echo '
+           	        	     	       <label>'.$values['name'].'</label>
+           	        	     	       
+            <md-select ng-model="'.$values['columnname'].'">
+              <md-option ng-repeat="state in '.$values['columnname'].'" value="{{AD_Org_ID.name}}">
+                {{state.name}}
+              </md-option>
+            </md-select>';
+           	        	     	      echo '
+           	        	     	      <a href="/index.php/tabledirect/">'
+           	        	     	      .$values['name']
+           	        	     	      .
+           	        	     	      '</a>';
+           	        	     	      echo $values['select'];
+                                      
+           	        	     	      
+           	        	     	      break;     
            	        	     	default:
            	        	     	    
            	                // echo "<label>".$values['name']."</label>";
-           	                 echo "<labe l>".$values['name']."</label>";
-           	                  echo "<input value='".$values['reference']."'></>";
+           	                 echo "<label>".$values['name']."</label>";
+           	                  echo "<input></>";
            	                
            	        	     		# code...
            	        	     		break;
