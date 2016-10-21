@@ -206,7 +206,7 @@
            	        	     	       <label>'.$values['name'].'</label>
            	        	     	       
             <md-select ng-model="'.$values['columnname'].'">
-              <md-option ng-repeat="state in '.$values['columnname'].'" value="{{AD_Org_ID.name}}">
+              <md-option ng-repeat="state in '.$values['columnname'].'" value="{{'.$values['columnname'].'.value}}">
                 {{state.name}}
               </md-option>
             </md-select>';
