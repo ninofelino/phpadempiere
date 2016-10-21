@@ -108,6 +108,7 @@ class erp
       left outer join
       (
       select c.ad_tab_id,c.name,d.columnname,e.name as reference,
+      (select tablename from ad_table where ad_table_id=d.ad_table_id) as tablename,
       c.isdisplayed,c.xposition,e.ad_reference_id as refid,
       case when e.ad_reference_id=19 then
            (select array_agg(x) from (select name,value from ad_org) x ) 

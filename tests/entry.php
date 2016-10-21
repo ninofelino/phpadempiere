@@ -3,13 +3,10 @@
 <head>
 	<title>Entry From</title>
 	 <link rel="stylesheet" href="css/angular-material.min.css">
-	 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.csrs">
-     <script src="js/angular.min.js"></script>
+	 <script src="js/angular.min.js"></script>
      <script src="js/angular-animate.min.js"></script>
      <script src="js/angular-aria.min.js"></script>
      <script src="js/angular-material.min.js"></script>
-     
-  <!-- Angular Material Library -->
      <script src="js/angular-ui-router.js"></script>
      <script src="js/dirPagination.js"></script>
      <script>
@@ -34,7 +31,8 @@
                         
                           	      foreach($values['select'] as $keyeee=>$valuess)
                                  {
-                                 	echo '{name:"'.$valuess['name'].'"},';
+                                 	echo '{name:"'.$valuess['name'].'",value:"'
+                                 	              .$valuess['value'].'"},';
                                  };  
                                  echo'{name:"eof"}';
                	       	     echo ']; ';
@@ -77,11 +75,21 @@
         </md-fab-trigger>
 
         <md-fab-actions>
+
+         <md-button aria-label="undo" class="md-fab md-raised md-mini">
+            <md-icon md-svg-src="../images/24px/ic_save_black_24px.svg" aria-label="undo"></md-icon>
+            <md-tooltip md-direction="bottom">Save</md-tooltip>
+
+          </md-button>
+
           <md-button aria-label="undo" class="md-fab md-raised md-mini">
             <md-icon md-svg-src="../images/24px/ic_undo_black_24px.svg" aria-label="undo"></md-icon>
             <md-tooltip md-direction="bottom">Undo</md-tooltip>
 
           </md-button>
+
+
+
           <md-button aria-label="Help" class="md-fab md-raised md-mini">
           <md-tooltip md-direction="bottom">Help</md-tooltip>
 
@@ -203,22 +211,18 @@
            	        	     	     break;
            	        	     	case 'Table Direct':
            	        	     	        echo '
-           	        	     	       <label>'.$values['name'].'</label>
-           	        	     	       
-            <md-select ng-model="'.$values['columnname'].'">
-              <md-option ng-repeat="state in '.$values['columnname'].'" value="{{'.$values['columnname'].'.value}}">
-                {{state.name}}
-              </md-option>
-            </md-select>';
-           	        	     	      echo '
-           	        	     	      <a href="/index.php/tabledirect/">'
-           	        	     	      .$values['name']
-           	        	     	      .
-           	        	     	      '</a>';
-           	        	     	      echo $values['select'];
-                                      
-           	        	     	      
-           	        	     	      break;     
+           	        	     	    <label>'.$values['name'].'</label>      
+                                    <md-select ng-model="'.$values['tablename'].$values['columnname'].'">
+                                    <md-option'
+                                    .' ng-value="'.$values['columnname'].''.'"' 
+                                    .' ng-repeat="state in '
+                                    .$values['columnname']
+                                    .'"'. 
+                                    '>
+                                    {{state.name}}
+                                    </md-option>
+                                    </md-select>'; 	      
+           	      	     	      break;     
            	        	     	default:
            	        	     	    
            	                // echo "<label>".$values['name']."</label>";
