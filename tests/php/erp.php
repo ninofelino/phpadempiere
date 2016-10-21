@@ -103,15 +103,19 @@ class erp
       $db->data["window"]="
        select row_to_json(r) from
       (
-       select (select name from ad_window where ad_window_id=a.ad_window_id) as window,a.name,array_agg(t) as field from
+       select a.name,array_agg(t) as field from
       ad_tab a 
       left outer join
       (
-      select c.ad_tab_id,c.name,d.columnname,e.name as reference 
+      select c.ad_tab_id,c.name,d.columnname,e.name as reference,
+      c.isdisplayed,c.xposition,e.ad_reference_id as refid
       from ad_field c
       left outer join ad_column d on c.ad_column_id=d.ad_column_id
       left outer join ad_reference e on d.ad_reference_id=e.ad_reference_id
-       )t  on  a.ad_tab_id=t.ad_tab_id where a.ad_window_id=200005 group by 1,2) r
+      left outer join ad_ref_list f on e.ad_reference_id=f.ad_reference_id
+      
+      where c.isdisplayed='Y' order by c.seqno
+       )t  on  a.ad_tab_id=t.ad_tab_id where a.ad_window_id=200005 group by 1) r
       ";
 
 

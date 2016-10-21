@@ -1,7 +1,10 @@
+ 
+
+
  <md-content flex layout-padding>
 
 <div ng-repeat="item in related">
-<md-card>
+<md-card >
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{item.name}}</span>
@@ -9,7 +12,14 @@
           </md-card-title-text>
           </md-card-title>  
           
-          <md-card-title-media layout="row" layout-wrap> 
+          <md-card-title-media layout="row" > 
+            <md-grid layout-fill flex
+    md-cols-sm="1"
+    md-cols-md="2"
+    md-cols-gt-md="2"
+    md-row-height-sm="100%"
+    md-row-height="600px"
+    md-gutter="8px">   
                  <div ng-repeat="x in item.field" >
           
                <md-input-container>
@@ -34,7 +44,7 @@
                   
                 </md-input-container>     
                   </div>
-         
+           </md-grid>
 
           </md-card-title-media>
           
